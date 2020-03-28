@@ -20,6 +20,9 @@ function index(){
 
    
   $data['arr_kecamatan'] = $this->dm->get_data_kecamatan();
+  $data['arr_sebaran'] = $this->dm->get_data_sebaran();
+
+  // show_array($data); 
 
   $data['class'] =  $this->class;
 
@@ -41,7 +44,8 @@ function simpan(){
     $arr_input = array("id_kecamatan"=>$id_kecamatan,
                        "odp"        => $post['odp'][$id_kecamatan],
                        "pdp"        => $post['pdp'][$id_kecamatan],
-                       "positif"        => $post['positif'][$id_kecamatan]
+                       "positif"        => $post['positif'][$id_kecamatan],
+                       "mati"        => $post['mati'][$id_kecamatan]
 
                      );
 
@@ -54,6 +58,8 @@ function simpan(){
 
   endforeach;
 
+  $ret = array("error"=>false,"message"=>"Data berhasil disimpan");
+  echo json_encode($ret);
 }
 
 

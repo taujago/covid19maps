@@ -1,6 +1,13 @@
 
 <link href="<?php echo base_url(); ?>/assets/plugins/tabs/style.css" rel="stylesheet" />
- 
+
+<style type="text/css">
+	
+.angka{
+	text-align: right;
+}
+
+</style> 
 
 <div class="row row-cards">
 	<div class="col-md-12">
@@ -43,16 +50,16 @@
 					</div>	
 
 					<div class="col-md-2">
-						<input type="number" min="0" name="odp[<?php echo $id ?>]" class="form-control" placeholder="ODP">
+						<input type="number" min="0" name="odp[<?php echo $id ?>]" class="angka form-control" placeholder="ODP" value="<?php echo $arr_sebaran[$id]['odp'] ?>">
 					</div>
 					<div class="col-md-2">
-						<input type="number" min="0" name="pdp[<?php echo $id ?>]" class="form-control" placeholder="PDP">
+						<input type="number" min="0" name="pdp[<?php echo $id ?>]" class="angka form-control" placeholder="PDP" value="<?php echo $arr_sebaran[$id]['pdp'] ?>">
 					</div>
 					<div class="col-md-2">
-						<input type="number" min="0" name="positif[<?php echo $id ?>]" class="form-control" placeholder="Positif">
+						<input type="number" min="0" name="positif[<?php echo $id ?>]" class="angka form-control" placeholder="Positif" value="<?php echo $arr_sebaran[$id]['positif'] ?>">
 					</div>
 					<div class="col-md-2">
-						<input type="number" min="0" name="mati[<?php echo $id ?>]" class="form-control" placeholder="Wafat">
+						<input type="number" min="0" name="mati[<?php echo $id ?>]" class="angka form-control" placeholder="Wafat" value="<?php echo $arr_sebaran[$id]['mati'] ?>">
 					</div>
 
 					</div> 	

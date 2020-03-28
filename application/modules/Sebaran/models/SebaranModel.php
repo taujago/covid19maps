@@ -17,6 +17,21 @@ class SebaranModel extends CI_Model {
 	}
 	 
  
+function get_data_sebaran(){
+	$res = $this->db->get("sebaran");
+
+	$arr = array();
+	foreach($res->result() as $row):
+	$arr[$row->id_kecamatan] = array(
+								"odp"=>$row->odp,
+								"pdp"=>$row->pdp,
+								"positif"=>$row->positif,
+								"mati"=>$row->mati
+								); 
+	endforeach;
+	return $arr;
+}
+
 
 }
 ?>
