@@ -71,6 +71,7 @@
                     strokeColor: feature.getProperty('color'),
                     strokeWeight: 4,
                     fillColor : feature.getProperty('color'),
+                    fillOpacity : 0.7,
                     icon: pinImage,
                     shadow: pinShadow,
                 };

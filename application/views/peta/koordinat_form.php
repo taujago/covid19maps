@@ -60,7 +60,7 @@
 		 		<button type="button" class="btn btn-lg btn-block btn-success" id="btnsimpan"> <i class="fa fa-save"></i> SIMPAN</button>
 		 	</div>
 		 	<div class="col-md-6 col-lg-6"  >
-		 		<a href="<?= site_url('peta'); ?>" class="btn btn-lg btn-block btn-danger"> <i class="fa fa-arrow-left"></i> KEMBALI</a>
+		 		<a href="<?= site_url('peta/tabel'); ?>" class="btn btn-lg btn-block btn-danger"> <i class="fa fa-arrow-left"></i> KEMBALI</a>
 		 	</div>
 		 </div>
 	</div>
