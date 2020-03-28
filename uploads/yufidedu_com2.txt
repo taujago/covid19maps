@@ -1,0 +1,34 @@
+;;
+;; Domain:     yufidedu.com.
+;; Exported:   2019-02-10 00:10:45
+;;
+;; This file is intended for use for informational and archival
+;; purposes ONLY and MUST be edited before use on a production
+;; DNS server.  In particular, you must:
+;;   -- update the SOA record with the correct authoritative name server
+;;   -- update the SOA record with the contact e-mail address information
+;;   -- update the NS record(s) with the authoritative name servers for this domain.
+;;
+;; For further information, please consult the BIND documentation
+;; located on the following website:
+;;
+;; http://www.isc.org/
+;;
+;; And RFC 1035:
+;;
+;; http://www.ietf.org/rfc/rfc1035.txt
+;;
+;; Please note that we do NOT offer technical support for any use
+;; of this zone data, the BIND name server, or any other third-party
+;; DNS software.
+;;
+;; Use at your own risk.
+
+;; SOA Record
+yufidedu.com.	3600	IN	SOA	yufidedu.com. root.yufidedu.com. 2030142404 7200 3600 86400 3600
+
+;; A Records
+yufidedu.com.	1	IN	A	50.28.66.82
+
+;; CNAME Records
+www.yufidedu.com.	1	IN	CNAME	yufidedu.com.
