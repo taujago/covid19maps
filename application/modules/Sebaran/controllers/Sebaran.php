@@ -35,7 +35,25 @@ function index(){
 
 function simpan(){
   $post = $this->input->post(); 
-  show_array($post);
+  // show_array($post);
+  foreach($post['id_kecamatan'] as $id_kecamatan) : 
+
+    $arr_input = array("id_kecamatan"=>$id_kecamatan,
+                       "odp"        => $post['odp'][$id_kecamatan],
+                       "pdp"        => $post['pdp'][$id_kecamatan],
+                       "positif"        => $post['positif'][$id_kecamatan]
+
+                     );
+
+    $this->db->where("id_kecamatan",$id_kecamatan); 
+    $this->db->delete("sebaran");
+
+    $this->db->insert("sebaran",$arr_input);
+
+
+
+  endforeach;
+
 }
 
 
