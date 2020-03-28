@@ -1,5 +1,7 @@
 
-<link href="<?php echo base_url(); ?>/assets/plugins/tabs/style.css" rel="stylesheet" />
+<link href="<?php echo base_url(); ?>/assets/plugins/datepicker/datepicker.css" rel="stylesheet" />
+
+<script type="text/javascript" src="<?php echo base_url(); ?>/assets/plugins/datepicker/bootstrap-datepicker.js"></script>
 
 <style type="text/css">
 	
@@ -7,38 +9,72 @@
 	text-align: right;
 }
 
+.tebal {
+	font-weight: bold;
+}
+
 </style> 
+<form id="frmsebaran" method="post" >	
+<div class="row row-cards">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-status bg-primary br-tr-7 br-tl-7"></div>
+			<div class="card-header">
+					<h3 class="card-title">Waktu Update</h3>
+					
+			</div>
+			<div class="card-body">
+
+				<div class="row">
+					
+					<div class="col-md-4">
+						
+
+						<div class="form-group">
+							<label for="tanggal"><strong>Tanggal update (dd-mm-YYYY)</strong> </label>
+							<input id="tanggal" type="text" name="tanggal" class="form-control" placeholder="dd-mm-YYYY" data-date-format="dd-mm-yyyy" autocomplete="off" value="<?php echo date("d-m-Y");?>">
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <div class="row row-cards">
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-status bg-primary br-tr-7 br-tl-7"></div>
 			<div class="card-header">
-					<h3 class="card-title">Filter</h3>
+					<h3 class="card-title">Data sebaran</h3>
 					
 			</div>
 			<div class="card-body">
 
 				
-		<form id="frmsebaran" method="post" >		
+			
 
-			<div class="row">
+			<div class="row mb-3">
 					<div class="col-md-3">
-						<H3>KECAMATAN</H3> 
+						<span><strong> KECAMATAN</strong> </span> 
 						 
 					</div>	
 
 					<div class="col-md-2">
-						<H3 class="text-success">ODP</H3> 
+						<span  class=" tebal text-success">ODP</span > 
 					</div>
 					<div class="col-md-2">
-						<H3 class=text-warning>PDP</H3> 
+						<span  class=t tebal ext-warning>PDP</span > 
 					</div>
 					<div class="col-md-2">
-						<H3 class="text-danger">POSITIF</H3> 
+						<span  class=" tebal text-danger">POSITIF</span > 
 					</div>
 					<div class="col-md-2">
-						<H3 class="text-dark">WAFAT</H3> 
+						<span  class=" tebal text-dark">WAFAT</span > 
 					</div>
 			</div>
 
@@ -79,6 +115,7 @@
 	
 </div>
 
+</form>
 <div id="hasil">
 </div>
 

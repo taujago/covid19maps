@@ -29,7 +29,7 @@ function index(){
   // $data['arr_komoditas'] = $this->db->get('m_komoditas')->result_array();
 
   $content = $this->load->view("$this->class"."View",$data,true); 
-  $this->set_title("Input data luas panen");
+  $this->set_title("INPUT DATA SEBARAN");
   $this->set_content($content);
   $this->render();
 }
@@ -57,6 +57,11 @@ function simpan(){
 
 
   endforeach;
+
+  // update table waktu update 
+  $update['tanggal'] = flipdate($post['tanggal']);
+
+  $this->db->update("waktu_update",$update);
 
   $ret = array("error"=>false,"message"=>"Data berhasil disimpan");
   echo json_encode($ret);

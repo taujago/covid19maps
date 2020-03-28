@@ -3,7 +3,9 @@
 		 
 
 
-
+$("#tanggal").datepicker().on('changeDate', function(ev){                 
+   			 $('#tanggal').datepicker('hide');
+});
 
 $("#btnsimpan").click(function(){
 
