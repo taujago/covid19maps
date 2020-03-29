@@ -5,61 +5,11 @@ class Peta extends Admin_controller {
 
 	function __construct(){
 		parent::__construct();
-		$this->load->model('Core_model', 'cm');
 	}
 
-	// function index()
-	// {
-	// 	$this->db->select('*');
-	// 	$this->db->from('sebaran');
-	// 	$this->db->join('tiger_kecamatan', 'tiger_kecamatan.id = sebaran.id_kecamatan', 'left');
-	// 	$db = $this->db->get()->result_array();
-
-	// 	$isi = [];
-
-	// 	foreach ($db as $row):
- //    		$features = unserialize($row['kordinat']);
- //    		if (!empty($features)) {
-    			
- //    			if ($row['positif']) {
- //    				$color = '#FF0000';
- //    			}
- //    			elseif ($row['positif'] == 0 && $row['pdp'] > 0) {
- //    				$color = '#FFFF00';
- //    			}
- //    			else{
- //    				$color = '#00FF00';
- //    			}
-
- //    			$features->properties['color'] = $color;
- //    			$features->properties['Kecamatan'] = $row['kecamatan'];
- //    			$features->properties['Orang Dalam Pengawasan (ODP)'] = $row['odp'].' Orang';
- //    			$features->properties['Pasien Dalam Pantauan (PDP)'] = $row['pdp'].' Orang';
- //    			$features->properties['Positif'] = $row['positif'].' Orang';
- //    			$features->properties['Meninggal'] = $row['mati'].' Orang';
-
-	//     		$isi[] = $features;
- //    		}
-    		
- //    	endforeach;
-
- //    	$arr = array(
- //    		'type' => 'FeatureCollection',
- //    		'features' => $isi
- //    	);
-
- //    	//show_array($arr); exit();
-
-	// 	$arr = json_encode($arr, JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK);
-	// 	$this->session->set_userdata("data_peta",$arr);
-
-	// 	$data['geojson'] = site_url('peta/geojson');
-
-	// 	$this->load->view('peta/peta_view', $data);
-
-
-
-	// }
+	function index(){
+		redirect();
+	}
 
 
 	function tabel(){
@@ -79,7 +29,6 @@ class Peta extends Admin_controller {
 	}
 
 	function form_peta($id = null){
-		$data['arr_kec'] = $this->cm->arr_dropdown('tiger_kecamatan','id','kecamatan','kecamatan');
 		$data['table']['data'] = [];
 		$data['table']['colspan'] = 0;
 		$data['table']['header'] =[];
@@ -97,13 +46,11 @@ class Peta extends Admin_controller {
 			if (!empty($db)) {
 				foreach ($db->geometry->coordinates as $key => $value) {
 	                foreach ($value as $key1 => $value1) {
-	                    foreach ($value1 as $value1) {
-	                        $koordinat[] = $value1[1].','.$value1[0];
-	                    }
-	                    $_koordinat = $koordinat[0];
-	                    array_pop($koordinat);
-	                    $koordinat = implode("\n", $koordinat);
+	                	$koordinat[] = $value1[1].','.$value1[0];
 	                }
+	                $_koordinat = $koordinat[0];
+	                array_pop($koordinat);
+	                $koordinat = implode("\n", $koordinat);
 	            }
 			}
 			else{
@@ -139,14 +86,14 @@ class Peta extends Admin_controller {
 			$koor[] = array(rtrim($value[1]),rtrim($value[0]));
 		}
 
-		$arr_koor = array(array($koor));
+		$arr_koor = array($koor);
 		$arr_pro = [];
 
 		$post['kordinat'] = array(
 			'type' => 'Feature',
 			'properties' => $arr_pro,
 			'geometry' => array(
-				'type' => 'MultiPolygon',
+				'type' => 'Polygon',
 				'coordinates' => $arr_koor
 			)
 		);
@@ -195,9 +142,9 @@ class Peta extends Admin_controller {
 	function set_geojson(){
 		$post = $this->input->post();
 
-		$type = 'MultiPolygon';
+		$type = 'Polygon';
 		$koor = explode("\n", $post['koordinat']);
-		if ($type == 'MultiPolygon') {
+		if ($type == 'Polygon') {
 			$koor[] = reset($koor);
 		}
 		$koor = array_filter($koor);
@@ -208,8 +155,8 @@ class Peta extends Admin_controller {
 			$value = explode(',', $value);
 			$data[] = array($value[1],$value[0]);
 		}
-		if ($type == 'MultiPolygon') {
-			$koordinat = array(array($data));
+		if ($type == 'Polygon') {
+			$koordinat = array($data);
 		}
 		else{
 			$koordinat = $data;
@@ -232,72 +179,6 @@ class Peta extends Admin_controller {
 		$data = json_encode($data, JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK);
 		$this->session->set_userdata("data_peta",$data);
 	}
-
-
-	function get_koor(){
-        $get = $this->input->get();
-
-        $arr = array();
-
-        if (isset($get['id'])) {
-        	$get = $get['id'];
-        	$get = explode(',', $get);
-        	//show_array($get); exit();
-        	$arr_j = array_filter($get,function($var){return(strpos($var,'j_') !== FALSE);});
-	        $arr_i = array_filter($get,function($var){return(strpos($var,'i_') !== FALSE);});
-
-	        $jenis_id = str_replace('j_', '', $arr_j);
-	        $lokasi_id = str_replace('i_', '', $arr_i);
-
-	        if (count($jenis_id) > 0) {
-	        	foreach ($jenis_id as $jenis_id) :
-	        		$db = $this->db->where('lokasi_jenis', $jenis_id)->get('lokasi')->result_array();
-		        	$m = $this->db->where('id', $jenis_id)->get('master')->row_array();
-
-		        	$isi = array();
-					foreach ($db as $row):
-		        		$features = unserialize($row['lokasi_data']);
-		        		$features->properties->master_id = $row['lokasi_master'];
-		        		$features->properties->lokasi_id = $row['lokasi_id'];
-		        		$features->properties->color = $m['master_warna'];
-			        	$features->properties->jenis = $m['master_nama'];
-			        	//unset($features->properties);
-		        		$isi[] = $features;
-		        	endforeach;
-
-		        	$arr = array(
-		        		'type' => 'FeatureCollection',
-		        		'features' => $isi
-		        	);
-
-	        	endforeach;
-	        }
-
-	        if (count($lokasi_id) > 0) {
-	        	foreach ($lokasi_id as $lokasi_id) :
-	        		$lokasi = $this->db->where('lokasi_id', $lokasi_id)->get('lokasi')->result_array();
-	        		foreach ($lokasi as $row) :
-	        			$m = $this->db->where('id', $row['lokasi_jenis'])->get('master')->row_array();
-			        	$features = unserialize($row['lokasi_data']);
-			        	$features->properties->color = $m['master_warna'];
-			        	$features->properties->jenis = $m['master_nama'];
-			        	$features->properties->master_id = $row['lokasi_master'];
-		        		$features->properties->lokasi_id = $row['lokasi_id'];
-		        		//unset($features->properties);
-			        	$isi[] = $features;
-
-			        	$arr = array(
-			        		'type' => 'FeatureCollection',
-			        		'features' => $isi
-			        	);
-	        		endforeach;
-	        	endforeach;
-	        }
-        }
-
-        return $arr;
-	}
-
 
 }
 

@@ -52,7 +52,7 @@
 				<div class="header py-4">
 					<div class="container">
 						<div class="d-flex">
-							<a class="header-brand" href="<?php echo site_url("AdminDesa"); ?>">
+							<a class="header-brand" href="<?php echo site_url(); ?>">
 								<img alt="vobilet logo" class="header-brand-img" src="<?php echo base_url(); ?>assets/images/fight-covid19.png">
 							</a>
 							<div class="d-flex order-lg-2 ml-auto">
@@ -62,9 +62,16 @@
 								<div class="dropdown">
 									<a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
 										<span class="avatar avatar-md brround" style="background-image: url(assets/images/faces/female/25.jpg)"></span>
+
 										<span class="ml-2 d-none d-lg-block">
-											<span class="text-dark"><?php echo $userdata['nama'] ?></span>
+											<span class="text-dark app-sidebar__user-name font-weight-semibold">
+												<?php echo strtoupper($userdata['nama']) ?>
+											</span><br>
+											<span class="text-muted app-sidebar__user-name" style="font-size: 12px">
+												<?= $userdata['level'] == 9 ? 'Administrator' : 'Operator'; ?>
+											</span>
 										</span>
+
 									</a>
 									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
 										<a class="dropdown-item" href="#">
@@ -72,7 +79,7 @@
 										</a>
 										 
 										 
-										<a class="dropdown-item" href="<?php echo site_url('login/logout_kecamatan'); ?>">
+										<a class="dropdown-item" href="<?php echo site_url('login/logout'); ?>">
 											<i class="dropdown-icon mdi  mdi-logout-variant"></i> Sign out
 										</a>
 									</div>

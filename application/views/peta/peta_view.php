@@ -40,6 +40,8 @@
     </div>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwFDIGf4SfMS7X1A0PLhclAkDPWqOiy5s"></script>
+    <script src="<?php echo base_url(); ?>/assets/js/maplabel.js"></script>
+    
     <script type="text/javascript">
 
         var map;
@@ -49,7 +51,7 @@
             var map = new google.maps.Map(
             document.getElementById("mapid"), {
                 center: new google.maps.LatLng(-8.753745,116.852609),
-                zoom: 'auto',
+                zoom: 13,
                 mapTypeId: google.maps.MapTypeId.SATELLITE
             });
             if (link !== '') {
@@ -72,29 +74,29 @@
                     strokeWeight: 4,
                     fillColor : feature.getProperty('color'),
                     fillOpacity : 0.7,
-                    icon: pinImage,
+                    icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png',
                     shadow: pinShadow,
                 };
             });
 
             map.data.addListener('click', function(event){
                 $('#detail_peta').modal('show');
-                // console.log(event);
-                // ODP = xx PDP = xx Positif = xx Meninggal = xx
-                var kecamatan  = event.feature.getProperty('Kecamatan');
+                var kec  = event.feature.getProperty('kec');
+                var odp  = event.feature.getProperty('odp');
+                var pdp  = event.feature.getProperty('pdp');
+                var positif  = event.feature.getProperty('positif');
+                var mati  = event.feature.getProperty('mati');
 
-                event.feature.removeProperty('color');
-                $('#judul_modal').html('KECAMATAN' +' "'+ kecamatan +'"');
+               // console.log(odp);
 
-                var html = '';
-                var form = '';
-                event.feature.forEachProperty(function(value,property) {
-                     html += `<div class="col-7">`+property+`</div>
-                             <div class="col-5">: `+value+`</div>`;
-                });
+                $('#judul_modal').html('KECAMATAN' +' "'+ kec +'"');
+                var html = `
+                    <div class="col-7">Orang Dalam Pengawasan (ODP)</div><div class="col-5">: `+odp+`</div>
+                    <div class="col-7">Pasien Dalam Pantauan (PDP)</div><div class="col-5">: `+pdp+`</div>
+                    <div class="col-7">Positif</div><div class="col-5">: `+positif+`</div>
+                    <div class="col-7">Meninggal</div><div class="col-5">: `+mati+`</div>`;
 
                 $('#detail_lokasi').html(html);
-
             });
 
             var bounds = new google.maps.LatLngBounds();
@@ -104,17 +106,43 @@
                 map.fitBounds(bounds);
             });
 
+
+            map.data.addListener('addfeature',function(e){
+                if(e.feature.getGeometry().getType()==='Polygon'){
+                    var bounds = new google.maps.LatLngBounds();
+
+                    e.feature.getGeometry().getArray().forEach(function(path){
+                        path.getArray().forEach(function(latLng){bounds.extend(latLng);})
+                    });
+                    // e.feature.setProperty('bounds',bounds);
+                    // new google.maps.Rectangle({map:map,bounds:bounds,clickable:false})
+                    var kec  = e.feature.getProperty('kec');
+                    var clr  = e.feature.getProperty('color');
+
+                    var koor = bounds.getCenter();
+
+                    var mapLabel = new MapLabel({
+                        text: kec,
+                        position: koor,
+                        map: map,
+                        fontSize: 16,
+                        //fontColor : clr,
+                        strokeWeight : 1,
+                        strokeColor : '#000000',
+                    });
+                }
+            });
         }
 
         function processPoints(geometry, callback, thisArg) {
-        if (geometry instanceof google.maps.LatLng) {
+            if (geometry instanceof google.maps.LatLng) {
                 callback.call(thisArg, geometry);
             } else if (geometry instanceof google.maps.Data.Point) {
                 callback.call(thisArg, geometry.get());
             } else {
                 geometry.getArray().forEach(function(g) {
-                processPoints(g, callback, thisArg);
-            });
+                    processPoints(g, callback, thisArg);
+                });
             }
         }
         google.maps.event.addDomListener(window, "load", initialize);

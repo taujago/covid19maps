@@ -5,25 +5,12 @@ class Admin_controller extends CI_Controller {
 	var $content;
 	function __construct(){
 		parent::__construct();
-		// cek for session 
-		// echo $this->session->userdata("login");
-		// if($this->session->userdata("login") <> true ) {
-		// 	// echo 'fuck';
-			
-		// 	redirect("login");
-		// 	exit;
-		// }
+		$sesi = $this->session->userdata('user_covid');
 
-
-		// $userdata = $this->session->userdata("userdata");
-
-		// 	if ($userdata['level']!=1) {
-		// 		redirect("login");
-		// 		exit;
-				
-		// 	}
-
-
+		if(empty($sesi)) {
+			redirect('login');
+			exit();
+		}
 
 	}
 
@@ -37,10 +24,11 @@ class Admin_controller extends CI_Controller {
 	}
 
 	function render(){
-		$data['userdata'] = $this->session->userdata("userdata");
+		$data['userdata'] = $this->session->userdata("user_covid");
 
-		// $data['userdata']['level2'] = ($data['userdata']['level']==0)?"Administrator":"Operator";
-		
+		//show_array($data); exit();
+
+		$data['userdata']['level2'] = ($data['userdata']['level']==0)?"Administrator":"Operator";
 		$data['subtitle'] = $this->title;
 		$data['content'] = $this->content;
 		$this->load->view("template2",$data);

@@ -2,7 +2,6 @@
 class Frontpage extends CI_Controller{
 	function __construct(){
 		parent::__construct();
-		$this->load->model('Core_model', 'cm');
 	}
 
 	function index()
@@ -29,11 +28,11 @@ class Frontpage extends CI_Controller{
     			}
 
     			$features->properties['color'] = $color;
-    			$features->properties['Kecamatan'] = $row['kecamatan'];
-    			$features->properties['Orang Dalam Pengawasan (ODP)'] = $row['odp'].' Orang';
-    			$features->properties['Pasien Dalam Pantauan (PDP)'] = $row['pdp'].' Orang';
-    			$features->properties['Positif'] = $row['positif'].' Orang';
-    			$features->properties['Meninggal'] = $row['mati'].' Orang';
+    			$features->properties['kec'] = $row['kecamatan'];
+    			$features->properties['odp'] = $row['odp'].' Orang';
+    			$features->properties['pdp'] = $row['pdp'].' Orang';
+    			$features->properties['positif'] = $row['positif'].' Orang';
+    			$features->properties['mati'] = $row['mati'].' Orang';
 
 	    		$isi[] = $features;
     		}
@@ -50,12 +49,15 @@ class Frontpage extends CI_Controller{
 		$arr = json_encode($arr, JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK);
 		$this->session->set_userdata("data_peta",$arr);
 
-		$data['geojson'] = site_url('peta/geojson');
+		$data['geojson'] = site_url('frontpage/geojson');
 
 		$this->load->view('peta/peta_view', $data);
 
-
-
 	}
+
+    function geojson(){
+        $data = $this->session->userdata('data_peta');
+        echo $data;
+    }
 }
 ?>
