@@ -1,7 +1,7 @@
 <?php 
-require_once APPPATH . 'core/Desa_controller.php';
+require_once APPPATH . 'core/Admin_controller.php';
 
-class Sebaran extends Desa_controller {
+class Sebaran extends Admin_controller {
 	var $class ;
 
 	function __construct(){

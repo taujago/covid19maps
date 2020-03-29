@@ -8,58 +8,58 @@ class Peta extends Admin_controller {
 		$this->load->model('Core_model', 'cm');
 	}
 
-	function index()
-	{
-		$this->db->select('*');
-		$this->db->from('sebaran');
-		$this->db->join('tiger_kecamatan', 'tiger_kecamatan.id = sebaran.id_kecamatan', 'left');
-		$db = $this->db->get()->result_array();
+	// function index()
+	// {
+	// 	$this->db->select('*');
+	// 	$this->db->from('sebaran');
+	// 	$this->db->join('tiger_kecamatan', 'tiger_kecamatan.id = sebaran.id_kecamatan', 'left');
+	// 	$db = $this->db->get()->result_array();
 
-		$isi = [];
+	// 	$isi = [];
 
-		foreach ($db as $row):
-    		$features = unserialize($row['kordinat']);
-    		if (!empty($features)) {
+	// 	foreach ($db as $row):
+ //    		$features = unserialize($row['kordinat']);
+ //    		if (!empty($features)) {
     			
-    			if ($row['positif']) {
-    				$color = '#FF0000';
-    			}
-    			elseif ($row['positif'] == 0 && $row['pdp'] > 0) {
-    				$color = '#FFFF00';
-    			}
-    			else{
-    				$color = '#00FF00';
-    			}
+ //    			if ($row['positif']) {
+ //    				$color = '#FF0000';
+ //    			}
+ //    			elseif ($row['positif'] == 0 && $row['pdp'] > 0) {
+ //    				$color = '#FFFF00';
+ //    			}
+ //    			else{
+ //    				$color = '#00FF00';
+ //    			}
 
-    			$features->properties['color'] = $color;
-    			$features->properties['Kecamatan'] = $row['kecamatan'];
-    			$features->properties['Orang Dalam Pengawasan (ODP)'] = $row['odp'].' Orang';
-    			$features->properties['Pasien Dalam Pantauan (PDP)'] = $row['pdp'].' Orang';
-    			$features->properties['Positif'] = $row['positif'].' Orang';
-    			$features->properties['Meninggal'] = $row['mati'].' Orang';
+ //    			$features->properties['color'] = $color;
+ //    			$features->properties['Kecamatan'] = $row['kecamatan'];
+ //    			$features->properties['Orang Dalam Pengawasan (ODP)'] = $row['odp'].' Orang';
+ //    			$features->properties['Pasien Dalam Pantauan (PDP)'] = $row['pdp'].' Orang';
+ //    			$features->properties['Positif'] = $row['positif'].' Orang';
+ //    			$features->properties['Meninggal'] = $row['mati'].' Orang';
 
-	    		$isi[] = $features;
-    		}
+	//     		$isi[] = $features;
+ //    		}
     		
-    	endforeach;
+ //    	endforeach;
 
-    	$arr = array(
-    		'type' => 'FeatureCollection',
-    		'features' => $isi
-    	);
+ //    	$arr = array(
+ //    		'type' => 'FeatureCollection',
+ //    		'features' => $isi
+ //    	);
 
-    	//show_array($arr); exit();
+ //    	//show_array($arr); exit();
 
-		$arr = json_encode($arr, JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK);
-		$this->session->set_userdata("data_peta",$arr);
+	// 	$arr = json_encode($arr, JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK);
+	// 	$this->session->set_userdata("data_peta",$arr);
 
-		$data['geojson'] = site_url('peta/geojson');
+	// 	$data['geojson'] = site_url('peta/geojson');
 
-		$this->load->view('peta/peta_view', $data);
+	// 	$this->load->view('peta/peta_view', $data);
 
 
 
-	}
+	// }
 
 
 	function tabel(){

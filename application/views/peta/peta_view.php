@@ -49,7 +49,7 @@
             var map = new google.maps.Map(
             document.getElementById("mapid"), {
                 center: new google.maps.LatLng(-8.753745,116.852609),
-                zoom: 15,
+                zoom: 'auto',
                 mapTypeId: google.maps.MapTypeId.SATELLITE
             });
             if (link !== '') {

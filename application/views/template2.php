@@ -16,7 +16,7 @@
 		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
 		<!-- Title -->
-		<title>SIMTAN</title>
+		<title>COVID 19 GEOMAP</title>
 		<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/fonts/fonts/font-awesome.min.css">
 		
 		<!-- Font Family-->
@@ -52,8 +52,8 @@
 				<div class="header py-4">
 					<div class="container">
 						<div class="d-flex">
-							<a class="header-brand" href="<?php echo site_url("admin"); ?>">
-								<img alt="vobilet logo" class="header-brand-img" src="<?php echo base_url(); ?>assets/images/logobaru.png">
+							<a class="header-brand" href="<?php echo site_url("AdminDesa"); ?>">
+								<img alt="vobilet logo" class="header-brand-img" src="<?php echo base_url(); ?>assets/images/fight-covid19.png">
 							</a>
 							<div class="d-flex order-lg-2 ml-auto">
 								 
@@ -72,7 +72,7 @@
 										</a>
 										 
 										 
-										<a class="dropdown-item" href="<?php echo site_url('login/logout'); ?>">
+										<a class="dropdown-item" href="<?php echo site_url('login/logout_kecamatan'); ?>">
 											<i class="dropdown-icon mdi  mdi-logout-variant"></i> Sign out
 										</a>
 									</div>
@@ -89,101 +89,22 @@
 <ul class="nav">
 
 	<li class="nav-item">
-		<a class="nav-link" href="<?php echo site_url('admin'); ?>">
+		<a class="nav-link" href="<?php echo site_url('Sebaran'); ?>">
 			<i class="fa fa-home"></i>
 			<span>DASHBOARD</span>
 		</a>
 	</li>
-	<li class="nav-item with-sub">
-		<a class="nav-link" href="#">
-			<i class="fa fa-window-restore"></i>
-			<span> DATA MASTER</span>
+	<li class="nav-item">
+		<a class="nav-link" href="<?php echo site_url('Peta/tabel'); ?>">
+			<i class="fa fa-cubes"></i>
+			<span>DATA KECAMATAN</span>
 		</a>
-		<div class="sub-item">
-			<ul>
-				
-				<li><a class=" <?php echo ($class=="desa")?"active":""; ?>" href="<?php echo site_url("desa"); ?>">DATA DESA</a></li>
-		<li><a class="" href="<?php echo site_url('Gapoktan') ?>">GAPOKTAN</a></li>
-		<li><a class="" href="<?php echo site_url('Poktan') ?>">POKTAN</a></li>
-		 
-		<li><a class="" href="<?php echo site_url("Penyuluh") ?>">PENYULUH</a></li>
-		<li><a class="" href="<?php echo site_url("Msumberdana") ?>">SUMBER DANA</a></li>
-		<li><a class="" href="<?php echo site_url("Mjenisfisik") ?>">JENIS FISIK</a></li>
-		<li><a class="" href="<?php echo site_url("Mjenisalsintan") ?>">JENIS ALSINTAN</a></li>
-		<li><a class="" href="<?php echo site_url("Mkomoditas") ?>">KOMODITAS</a></li>
-
-				 
-			</ul>
-		</div>
 	</li>
+	 
 
-
-	<li class="nav-item with-sub">
-		<a class="nav-link" href="#">
-			<i class="fa fa-table"></i>
-			<span> LAPORAN</span>
-		</a>
-		<div class="sub-item">
-			<ul>
-				
-		<li><a class=" <?php echo ($class=="desa")?"active":""; ?>" href="<?php echo site_url("LapSintan/Desa"); ?>">PETANI</a></li>
-		<li><a class="" href="<?php echo site_url('LapSintan/Kecamatan') ?>">LAPORAN SARANA</a></li>
-		<li><a class="" href="<?php echo site_url('AdminLapRealisasiTanam') ?>">LAPORAN LUAS TANAM</a></li>
-		<!-- <li><a class="" href="<?php echo site_url('LapSintan/Kabupaten') ?>">PER KECAMATAN</a></li> -->
-		<li><a class="" href="<?php echo site_url('AdminLapPanen') ?>">LAPORAN LUAS PANEN</a></li>
-		<li><a class="" href="<?php echo site_url('AdminLapSasaranIndikatif') ?>">LAPORAN SASARAN INDIKATIF</a></li>
-		
-			 
-			</ul>
-		</div>
-	</li>
 
 	 
-	<li class="nav-item with-sub">
-		<a class="nav-link" href="#">
-			<i class="fa fa-table"></i>
-			<span> LAPORAN ALSINTAN</span>
-		</a>
-		<div class="sub-item">
-			<ul>
-				
-		<li><a class=" <?php echo ($class=="desa")?"active":""; ?>" href="<?php echo site_url("LapSintan/Desa"); ?>">PER POKTAN</a></li>
-		<li><a class="" href="<?php echo site_url('LapSintan/Kecamatan') ?>">PER DESA / KELURAHAN</a></li>
-		<li><a class="" href="<?php echo site_url('LapSintan/Kabupaten') ?>">PER KECAMATAN</a></li>
-		
-		
-				 
-			</ul>
-		</div>
-	</li>
-
-
-	<li class="nav-item with-sub">
-		<a class="nav-link" href="#">
-			<i class="fa fa-bar-chart-o"></i>
-			<span>DATA GRAFIK</span>
-		</a>
-		<div class="sub-item">
-			<ul>
-				
-				<li><a class=" <?php echo ($class=="desa")?"active":""; ?>" href="<?php echo site_url("GrafikPetani"); ?>">PETANI</a></li>
-		<li><a class="" href="<?php echo site_url('GrafikPenyuluh') ?>">PENYULUH</a></li>
-		<li><a class="" href="<?php echo site_url('GrafikDataFisik') ?>">PETANI & BANGUNAN FISIK</a></li>
-		 
-		<li><a class="" href="<?php echo site_url("GrafikAlsintanPetani") ?>">PETANI ALSINTAN</a></li>
-		 
-
-				 
-			</ul>
-		</div><!-- sub-item -->
-	</li>
-
-	<li class="nav-item">
-		<a class="nav-link" href="<?php echo site_url("AdminPengguna"); ?>">
-			<i class="fa fa fa-lock"></i>
-			<span>PENGGUNA</span>
-		</a>
-	</li>
+	
 </ul>
 					</div>
 				</div>
@@ -242,7 +163,7 @@
 				<div class="container">
 					<div class="row align-items-center flex-row-reverse">
 						<div class="col-lg-12 col-sm-12 mt-3 mt-lg-0 text-center">
-							Copyright © 2018 <a href="#">Vobilet</a>. Designed by <a href="#">Spruko</a> All rights reserved.
+							Copyright © 2020 <a href="https://covid19.sumbawabaratkab.go.id">Dibuat dan dikelola oleh Satgas Covid19. Kabupaten Sumbawa Barat</a>
 						</div>
 					</div>
 				</div>

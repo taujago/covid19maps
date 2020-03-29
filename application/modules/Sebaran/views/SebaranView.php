@@ -65,16 +65,16 @@
 					</div>	
 
 					<div class="col-md-2">
-						<span  class=" tebal text-success">ODP</span > 
+						<span  class="tebal text-success">ODP</span > 
 					</div>
 					<div class="col-md-2">
-						<span  class=t tebal ext-warning>PDP</span > 
+						<span  class="tebal text-warning">PDP</span > 
 					</div>
 					<div class="col-md-2">
-						<span  class=" tebal text-danger">POSITIF</span > 
+						<span  class="tebal text-danger">POSITIF</span > 
 					</div>
 					<div class="col-md-2">
-						<span  class=" tebal text-dark">WAFAT</span > 
+						<span  class="tebal text-dark">WAFAT</span > 
 					</div>
 			</div>
 
