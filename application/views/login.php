@@ -94,7 +94,7 @@
 		                        showConfirmButton: false
 		                    });
 		                    setTimeout(function(){
-		                    	location.href = '<?php echo site_url('sebaran'); ?>';
+		                    	location.href = '<?php echo site_url('Sebaran'); ?>';
 		                    },1000);
 		                }
 		                else {
