@@ -27,12 +27,12 @@ class Frontpage extends CI_Controller{
     				$color = '#00FF00';
     			}
 
-    			$features->properties['color'] = $color;
-    			$features->properties['kec'] = $row['kecamatan'];
-    			$features->properties['odp'] = $row['odp'].' Orang';
-    			$features->properties['pdp'] = $row['pdp'].' Orang';
-    			$features->properties['positif'] = $row['positif'].' Orang';
-    			$features->properties['mati'] = $row['mati'].' Orang';
+    			$features->properties->color = $color;
+    			$features->properties->kec = $row['kecamatan'];
+    			$features->properties->odp = $row['odp'].' Orang';
+    			$features->properties->pdp = $row['pdp'].' Orang';
+    			$features->properties->positif = $row['positif'].' Orang';
+    			$features->properties->mati = $row['mati'].' Orang';
 
 	    		$isi[] = $features;
     		}

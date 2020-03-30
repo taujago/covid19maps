@@ -11,6 +11,29 @@ class Peta extends Admin_controller {
 		redirect();
 	}
 
+	function import(){
+		redirect();
+
+    	$file = base_url('uploads/batas_ksb.geojson');
+    	$data = file_get_contents($file);
+        $data = json_decode($data);
+
+        if (count($data->features) > 0) {
+        	$n=0; foreach ($data->features as $key => $value) : $n++;
+        		$kec = strtoupper(str_replace('Kec. ', '', $value->properties->Kecamatan));
+
+        		$value->properties = (object)[];
+        		$post['kordinat'] = serialize($value);
+
+        		$this->db->where('kecamatan', $kec)->update('tiger_kecamatan', $post);
+
+	        endforeach;
+        }
+        else{
+        	return false;
+        }
+	}
+
 
 	function tabel(){
 		$data['table']['data'] = [];
@@ -87,7 +110,7 @@ class Peta extends Admin_controller {
 		}
 
 		$arr_koor = array($koor);
-		$arr_pro = [];
+		$arr_pro = (object)[];
 
 		$post['kordinat'] = array(
 			'type' => 'Feature',

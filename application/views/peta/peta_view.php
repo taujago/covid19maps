@@ -70,11 +70,11 @@
                     new google.maps.Point(12, 35));
 
                 return {
-                    strokeColor: feature.getProperty('color'),
-                    strokeWeight: 4,
+                    strokeColor: '#00000',
+                    strokeWeight: 1,
                     fillColor : feature.getProperty('color'),
-                    fillOpacity : 0.7,
-                    icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png',
+                    fillOpacity : 1,
+                    icon: pinImage,
                     shadow: pinShadow,
                 };
             });
@@ -125,7 +125,7 @@
                         text: kec,
                         position: koor,
                         map: map,
-                        fontSize: 16,
+                        fontSize: 9,
                         //fontColor : clr,
                         strokeWeight : 1,
                         strokeColor : '#000000',
