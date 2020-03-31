@@ -2,6 +2,7 @@
 class Frontpage extends CI_Controller{
 	function __construct(){
 		parent::__construct();
+        $this->load->model("Core_model","cm");
 	}
 
 	function index()
@@ -48,6 +49,15 @@ class Frontpage extends CI_Controller{
 
 		$arr = json_encode($arr, JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK);
 		$this->session->set_userdata("data_peta",$arr);
+
+
+        $waktu=$this->db->get("waktu_update")->row();
+        $data['waktu'] = flipdate($waktu->tanggal);
+
+
+        $data['record'] = $this->cm->get_data_table();
+
+
 
 		$data['geojson'] = site_url('frontpage/geojson');
 

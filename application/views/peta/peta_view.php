@@ -12,12 +12,77 @@
 
     <link href="<?php echo base_url(); ?>/assets/plugins/sweetalert2/sweetalert2.css" rel="stylesheet" />   
     <script src="<?php echo base_url(); ?>/assets/plugins/sweetalert2/sweetalert2.all.js"></script>
+<style>
+    #legend {
+        background-color: #fff;
+        width: 300px;
+        margin-bottom: 50px;
+        margin-left : 20px;
+        padding: 10px;
+    }
 
+    #tlegend {
+        border-collapse: collapse;
+        
+    }
+
+    #tlegend th {
+        background-color: #ccc;
+        border: solid 1px #000;
+        text-align: center;
+    }
+
+    #tlegend td {
+        border: solid 1px #000;
+        text-align: center;
+    }
+
+    #moving_div{
+                position: fixed;
+                width: 1px;
+                height: 1px;
+                border-radius: 100%;
+                background-color:black;
+                box-shadow: 0 0 10px 10px black;
+                top: 49%;
+                left: 48.85%;
+            }
+
+
+</style>
     
 
 </head>
 <body style="overflow: hidden;">
+
+<div class="row">
+    <div class="col-md-12 p-3">
+        <span class="p-4 text-primary text-xl-left">Update terakhir pada : <?php echo $waktu; ?></span>
+    </div>
+</div>
+
+<!-- 
+<div id="moving_div">
+    MBALALA KABEKA NOROA MBALALA KABEKA NOROA MBALALA KABEKA NOROA MBALALA KABEKA NOROA MBALALA KABEKA NOROA MBALALA KABEKA NOROA MBALALA KABEKA NOROA MBALALA KABEKA NOROA MBALALA KABEKA NOROA MBALALA KABEKA NOROA 
+</div> -->
+
+
     <div id="mapid" style="width:100%; height:100%;"></div>
+    <div id="legend"> 
+       <table id="tlegend">
+        <tr><Th>KECAMATAN</TD><Th>ODP</TD><Th>PDP</TD><Th>KONFIRMASI</TD></tr>
+        <?php foreach($record->result() as $row) :  
+        ?>
+            <tr>
+                <td><?php echo $row->kecamatan ?></td>
+                <td><?php echo $row->odp ?></td>
+                <td><?php echo $row->pdp ?></td>
+                <td><?php echo $row->positif ?></td>
+            </tr>
+        <?php endforeach; ?>
+       </table>
+    </div>
+
     
     <div id="detail_peta" class="modal fade">
         <div class="modal-dialog" role="document">
@@ -39,10 +104,48 @@
         </div>
     </div>
 
+
+
+
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwFDIGf4SfMS7X1A0PLhclAkDPWqOiy5s"></script>
     <script src="<?php echo base_url(); ?>/assets/js/maplabel.js"></script>
     
     <script type="text/javascript">
+
+
+        var $mouseX = 0, $mouseY = 0;
+        var $xp = 0, $yp =0;
+    
+
+
+
+    var contentString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+      '<div id="bodyContent">'+
+      '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+      'sandstone rock formation in the southern part of the '+
+      'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
+      'south west of the nearest large town, Alice Springs; 450&#160;km '+
+      '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
+      'features of the Uluru - Kata Tjuta National Park. Uluru is '+
+      'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
+      'Aboriginal people of the area. It has many springs, waterholes, '+
+      'rock caves and ancient paintings. Uluru is listed as a World '+
+      'Heritage Site.</p>'+
+      '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+      'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+      '(last visited June 22, 2009).</p>'+
+      '</div>'+
+      '</div>';
+
+
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+
 
         var map;
         var link = '<?php echo isset($geojson) ? $geojson : "" ?>'; 
@@ -52,7 +155,8 @@
             document.getElementById("mapid"), {
                 center: new google.maps.LatLng(-8.753745,116.852609),
                 zoom: 13,
-                mapTypeId: google.maps.MapTypeId.SATELLITE
+                mapTypeId: 'roadmap'
+                // mapTypeId: google.maps.MapTypeId.SATELLITE
             });
             if (link !== '') {
                 map.data.loadGeoJson(link);
@@ -79,7 +183,28 @@
                 };
             });
 
+
+
+            map.data.addListener('mousemove', function(e){
+                
+
+
+                $mouseX = e.tb.screenX;
+                $mouseY = e.tb.screenY; 
+                console.log(e);
+                console.log(e.tb.screenX);
+                console.log(e.tb.screenY);
+                // console.log(e.XO.tb.screenX);
+                // console.log(e.pageY);
+
+            });
+
+
             map.data.addListener('click', function(event){
+
+
+                // infowindow.open(map, map.data);
+
                 $('#detail_peta').modal('show');
                 var kec  = event.feature.getProperty('kec');
                 var odp  = event.feature.getProperty('odp');
@@ -87,7 +212,7 @@
                 var positif  = event.feature.getProperty('positif');
                 var mati  = event.feature.getProperty('mati');
 
-               // console.log(odp);
+               
 
                 $('#judul_modal').html('KECAMATAN' +' "'+ kec +'"');
                 var html = `
@@ -96,7 +221,7 @@
                     <div class="col-7">Positif</div><div class="col-5">: `+positif+`</div>
                     <div class="col-7">Meninggal</div><div class="col-5">: `+mati+`</div>`;
 
-                $('#detail_lokasi').html(html);
+                $('#detail_lokasi').html(html); 
             });
 
             var bounds = new google.maps.LatLngBounds();
@@ -131,7 +256,13 @@
                         strokeColor : '#000000',
                     });
                 }
-            });
+            }); 
+
+        var legend = document.getElementById('legend');
+
+        map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
+
+
         }
 
         function processPoints(geometry, callback, thisArg) {

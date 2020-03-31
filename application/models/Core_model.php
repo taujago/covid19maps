@@ -128,4 +128,15 @@ function get_data_komoditas($id){
 }
 
 
+
+function get_data_table(){
+
+    $this->db->select('kec.kecamatan,seb.*')
+    ->from('tiger_kecamatan kec')
+    ->join('sebaran seb','kec.id=seb.id_kecamatan');
+    $res = $this->db->get();
+    return $res;
+
+}
+
 }

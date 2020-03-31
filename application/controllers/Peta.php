@@ -141,7 +141,9 @@ class Peta extends Admin_controller {
 	}
 
 	function lihat(){
+		
 		$data['geojson'] = site_url('peta/geojson');
+		// show_array($data);exit;
 		$this->load->view('peta/peta_view', $data);
 	}
 

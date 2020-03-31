@@ -4,7 +4,7 @@
     <link rel="icon" href="<?= base_url();?>/assets/ksb.png" type="image/x-icon"/>
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url();?>/assets/ksb.png" />
 
-    <title>PETA LOKASI || SIMTAN</title>
+    <title>Peta Sebaran sakit korona</title>
 
     <script src="<?= base_url(); ?>/assets/js/vendors/jquery-3.2.1.min.js"></script>
     <script src="<?= base_url(); ?>/assets/js/vendors/bootstrap.bundle.min.js"></script>
