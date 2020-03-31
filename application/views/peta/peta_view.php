@@ -54,12 +54,12 @@
 
 </head>
 <body style="overflow: hidden;">
-
+<!-- 
 <div class="row">
     <div class="col-md-12 p-3">
         <span class="p-4 text-primary text-xl-left">Update terakhir pada : <?php echo $waktu; ?></span>
     </div>
-</div>
+</div> -->
 
 <!-- 
 <div id="moving_div">
@@ -69,6 +69,7 @@
 
     <div id="mapid" style="width:100%; height:100%;"></div>
     <div id="legend"> 
+        <h4 class="text-primary text-xl-left">Update terakhir pada : <?php echo $waktu; ?></h4>
        <table id="tlegend">
         <tr><Th>KECAMATAN</TD><Th>ODP</TD><Th>PDP</TD><Th>KONFIRMASI</TD></tr>
         <?php 
