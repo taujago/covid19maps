@@ -16,9 +16,9 @@
     #legend {
         background-color: #fff;
         width: 300px;
-        margin-bottom: 50px;
+        margin-bottom: 10px;
         margin-left : 20px;
-        padding: 10px;
+        padding: 3px;
     }
 
     #tlegend {
