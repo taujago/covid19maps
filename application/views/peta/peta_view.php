@@ -71,7 +71,12 @@
     <div id="legend"> 
        <table id="tlegend">
         <tr><Th>KECAMATAN</TD><Th>ODP</TD><Th>PDP</TD><Th>KONFIRMASI</TD></tr>
-        <?php foreach($record->result() as $row) :  
+        <?php 
+        $todp=0; $tpdp =0; $tpositif=0;
+        foreach($record->result() as $row) :  
+            $todp   += $row->odp;
+            $tpdp   += $row->pdp;
+            $tpositif+= $row->positif;
         ?>
             <tr>
                 <td><?php echo $row->kecamatan ?></td>
@@ -80,6 +85,17 @@
                 <td><?php echo $row->positif ?></td>
             </tr>
         <?php endforeach; ?>
+        <tr>
+            <tr><Th>JUMLAH</TD><Th><?php echo $todp; ?></TD><Th><?php echo $tpdp; ?></TD><Th><?php echo $tpositif; ?></TD></tr>
+        </tr>
+       </table>
+
+       <br />
+       <h4>Keterangan</h4> : 
+       <table cellpadding="2px" cellspacing="2px;">
+        <tr><td style="background-color: green;">&nbsp; &nbsp;&nbsp;</td><td>ODP</td></tr>
+        <tr><td style="background-color: yellow;">&nbsp; &nbsp;&nbsp;</td><td>ODP,PDP</td></tr>
+        <tr><td style="background-color: red;">&nbsp; &nbsp;&nbsp;</td><td>KONFIRMASI</td></tr>
        </table>
     </div>
 
