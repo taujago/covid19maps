@@ -125,7 +125,7 @@
 
 
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwFDIGf4SfMS7X1A0PLhclAkDPWqOiy5s"></script>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script src="<?php echo base_url(); ?>/assets/js/maplabel.js"></script>
     
     <script type="text/javascript">
@@ -171,7 +171,7 @@
             var map = new google.maps.Map(
             document.getElementById("mapid"), {
                 center: new google.maps.LatLng(-8.753745,116.852609),
-                zoom: '50',
+                zoom: 50,
                 mapTypeId: 'roadmap',
                 mapTypeControl: false
                 // mapTypeId: google.maps.MapTypeId.SATELLITE
@@ -203,19 +203,19 @@
 
 
 
-            map.data.addListener('mousemove', function(e){
+            // map.data.addListener('mousemove', function(e){
                 
 
 
-                $mouseX = e.tb.screenX;
-                $mouseY = e.tb.screenY; 
-                console.log(e);
-                console.log(e.tb.screenX);
-                console.log(e.tb.screenY);
-                // console.log(e.XO.tb.screenX);
-                // console.log(e.pageY);
+            //     $mouseX = e.tb.screenX;
+            //     $mouseY = e.tb.screenY; 
+            //     console.log(e);
+            //     console.log(e.tb.screenX);
+            //     console.log(e.tb.screenY);
+            //     // console.log(e.XO.tb.screenX);
+            //     // console.log(e.pageY);
 
-            });
+            // });
 
 
             map.data.addListener('click', function(event){
